@@ -1,0 +1,23 @@
+#summary R/openMP binding
+
+= Introduction =
+
+ROMP
+
+* R openMP API 
+* R Syntax to Fortran Converter 
+* Accelerate R code by *compilation*
+* Parallelize R code by *vectorization* 
+* Speedup by _Compilation_: ~100 
+* Speedup by _Vectorization_: ~100 
+* Total Speedup: ~10000
+
+
+= Summary and Outlook =
+
+* ROMP scales up to ~100 cores (SMP) 
+* Acceleration up to several 10000 
+* Pre Alpha Version 
+* Combination Rmpi+ROMP? 
+* Extending map/reduce: Use monads? 
+* Type inference aka automatic typing?
