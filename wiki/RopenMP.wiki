@@ -37,18 +37,25 @@
  * Typing required, allowed types: `int()`, `dbl()`
 
 = Example =
- * Compute distance of two time series: 
+ * Compute distance of two time series
+ * pure R code:
 {{{
 x = as.double(runif(100)) 
 y = as.double(runif(100)) 
 for(i in 1:100) res=res+(x[i]-y[i])**2 
 }}}
 
- * ROMP calls: 
+ * the summation can also be written as:
+{{{
+res=sum((x-y)**2)
+}}}
+
+ * ROMP code: 
 {{{
 sum.mp(dosum,(x[i]-y[i])**2, dbl(),i=1:100) 
-dosum.f = compile.mp(dosum(), 
-dbl(),x=dbl(100),y=dbl(100)) 
+
+dosum.f = compile.mp(dosum(),dbl(),x=dbl(100),y=dbl(100))
+ 
 dosum.f(res=res, x=x, y=y) 
 }}}
 
