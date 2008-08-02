@@ -21,3 +21,8 @@
  # Combination Rmpi+ROMP? 
  # Extending map/reduce: Use monads? 
  # Type inference aka automatic typing?
+
+
+
+wiki syntax:
+http://code.google.com/p/support/wiki/WikiSyntax
