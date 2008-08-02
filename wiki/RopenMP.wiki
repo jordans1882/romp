@@ -26,27 +26,31 @@
 = Philosophy =
  * Use functional programming style 
  * Use closures 
- * R functions to Fortran functions in the {{{contains}}} part. 
+ * R functions to Fortran functions in the `contains` part. 
  * Higher order functions: map/reduce 
  * Translate map/reduce to openMP for/reduce pragmas
 
 = Abstractions =
  * R functions are translated to pure functions in Fortran 
- * R sum is replaced by sum.mp
- * R apply is replaced by apply.mp
- * Typing required, allowed types: int, double
+ * R `sum` is replaced by `sum.mp`
+ * R `apply` is replaced by `apply.mp`
+ * Typing required, allowed types: `int()`, `dbl()`
 
 = Example =
  * Compute distance of two time series: 
-{{{x = as.double(runif(100)) 
+{{{
+x = as.double(runif(100)) 
 y = as.double(runif(100)) 
-for(i in 1:100) res=res+(x[i]-y[i])**2 }}}
+for(i in 1:100) res=res+(x[i]-y[i])**2 
+}}}
 
  * ROMP calls: 
-{{{sum.mp(dosum,(x[i]-y[i])**2, dbl(),i=1:100) 
+{{{
+sum.mp(dosum,(x[i]-y[i])**2, dbl(),i=1:100) 
 dosum.f = compile.mp(dosum(), 
 dbl(),x=dbl(100),y=dbl(100)) 
-dosum.f(res=res, x=x, y=y) }}}
+dosum.f(res=res, x=x, y=y) 
+}}}
 
 
 
