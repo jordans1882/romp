@@ -1,4 +1,4 @@
-#summary This is a non-trivial example that shows how to use the Ropm library
+#summary This is a non-trivial example that shows how to use the Romp library
 
 = Introduction =
 
