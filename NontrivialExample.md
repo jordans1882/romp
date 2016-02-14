@@ -1,0 +1,33 @@
+# Introduction #
+
+We want to compute the pointwise dimension of a point cloud of np points in ndim dimensions. The locations of the points are given by a two-dimensional array x
+
+Ref: Local Scaling Properties for Diagnostic Purposes by W. Bunk, F. Jamitzky,
+R. Pompl, C. Rath and G. Morfill, Springer 2002
+
+# Pure R implementation #
+
+The local number density at each point within a radius r is then computed by the following pure R code:
+```
+dist <- function(i,j,x,r) ifelse(sum((x[i,1:ndim]-x[j,1:ndim])**2)>r**2,0,1)
+
+dens_one <- function(j,x,r) sum(sapply(1:np, function(i) dist(i,j,x,r)))
+
+comp.dens <- function(x,r) sapply(1:np, function(j) dens_one(j,x,r))
+
+comp.dens(x, r=0.1)
+```
+
+The function dist computes whether two points of a point cloud x[np,ndim] are closer that a distance r and returns 0 or 1 respectively.
+
+# Romp implementation #
+
+```
+sum.mp(dens_one,ifelse(sum((x[i,1:ndim]-x[j,1:ndim])**2)>r**2,0,1), int(), i=1:np, j=int())
+
+apply.mp(dens, dens_one(j), int(np), j=1:np) 
+
+comp.dens <-compile.mp( dens(),int(np),x=dbl(np,ndim),r=dbl(),ndim=int(),np=int())
+
+comp.dens(x, r=0.1, ndim=3, np=100000)
+```
